@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install UI dependencies
+        working-directory: secret-drop-ui
+        run: npm ci
+
+      - name: Audit UI dependencies
+        working-directory: secret-drop-ui
+        run: npm audit
+
+      - name: Build UI
+        working-directory: secret-drop-ui
+        env:
+          AGENT_DROP_DIR: /tmp/agent-drop-ci
+          NEXT_PUBLIC_BASE_PATH: ""
+        run: npm run build
+
+      - name: Install MCP dependencies
+        working-directory: mcp
+        run: npm ci
+
+      - name: Audit MCP dependencies
+        working-directory: mcp
+        run: npm audit
+
+      - name: Smoke test MCP server
+        working-directory: mcp
+        env:
+          AGENT_DROP_DIR: /tmp/agent-drop-ci
+        run: npm run smoke

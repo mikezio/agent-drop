@@ -1,0 +1,31 @@
+services:
+  agent-drop-ui:
+    build:
+      context: ./secret-drop-ui
+      args:
+        NEXT_PUBLIC_BASE_PATH: ${NEXT_PUBLIC_BASE_PATH:-}
+        NEXT_PUBLIC_AGENT_DROP_DIR: ${AGENT_DROP_DIR:-./data/agent-drop}
+    container_name: agent-drop-ui
+    environment:
+      AGENT_DROP_DIR: /data/agent-drop
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: "1"
+      PORT: "3000"
+      HOSTNAME: "0.0.0.0"
+    volumes:
+      - ${AGENT_DROP_DIR:-./data/agent-drop}:/data/agent-drop
+    ports:
+      - "${AGENT_DROP_HOST:-127.0.0.1}:${AGENT_DROP_PORT:-8400}:3000"
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000${NEXT_PUBLIC_BASE_PATH:-}/').then(r => { if (!r.ok) process.exit(1) }).catch(() => process.exit(1))"
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s

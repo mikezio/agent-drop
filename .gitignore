@@ -1,0 +1,22 @@
+.env
+.DS_Store
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local drop contents may contain secrets or user files.
+data/
+test_upload.blob
+
+# Build and generated artifacts.
+.next/
+out/
+dist/
+coverage/
+__pycache__/
+*.pyc
+secret-drop-ui/.next/
+secret-drop-ui/node_modules/
+secret-drop-ui/output/
+mcp/node_modules/

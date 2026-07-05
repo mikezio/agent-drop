@@ -1,0 +1,25 @@
+{
+  "name": "agent-drop-mcp",
+  "version": "1.0.0",
+  "description": "Local MCP server for Agent Drop file and secret handoffs between users and CLI AI agents.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikezio/agent-drop.git",
+    "directory": "mcp"
+  },
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "agent-drop-mcp": "./run.sh"
+  },
+  "scripts": {
+    "start": "./run.sh",
+    "smoke": "timeout 3 ./run.sh </dev/null || test $? -eq 124"
+  },
+  "keywords": ["mcp", "mcp-server", "agent", "cli-agent", "file-drop", "secrets", "handoff"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0"
+  }
+}

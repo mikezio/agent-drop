@@ -1,0 +1,34 @@
+{
+  "name": "agent-drop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local MCP file and secret handoff for CLI AI agents.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikezio/agent-drop.git"
+  },
+  "homepage": "https://github.com/mikezio/agent-drop#readme",
+  "bugs": {
+    "url": "https://github.com/mikezio/agent-drop/issues"
+  },
+  "keywords": [
+    "ai-agents",
+    "mcp",
+    "mcp-server",
+    "codex",
+    "gemini-cli",
+    "claude-code",
+    "local-first",
+    "secrets",
+    "file-sharing"
+  ],
+  "scripts": {
+    "setup": "node scripts/setup.js",
+    "dev": "npm --prefix secret-drop-ui run dev",
+    "build": "npm --prefix secret-drop-ui run build",
+    "start": "npm --prefix secret-drop-ui run start",
+    "mcp": "npm --prefix mcp run start",
+    "smoke:mcp": "npm --prefix mcp run smoke"
+  },
+  "license": "MIT"
+}
